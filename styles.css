@@ -62,7 +62,7 @@ color:green;
 color:red;
 }
 
-/* ===== מודאל עריכה ===== */
+/* ===== חלון עריכה ===== */
 
 .modal{
 display:none;
@@ -73,21 +73,21 @@ width:100vw;
 height:100vh;
 background:rgba(0,0,0,0.95);
 z-index:1000;
-
 display:flex;
 flex-direction:column;
 }
 
-/* אזור התוכן שניתן לגלילה */
+/* אזור גלילה */
 
 .modal-content{
 flex:1;
 overflow-y:auto;
 padding:20px;
+padding-bottom:300px; /* הארכת השטח השחור מתחת לכפתורים */
 text-align:center;
 }
 
-/* תמונת מוצר בעריכה */
+/* תמונת מוצר */
 
 .modal img{
 max-width:90%;
@@ -108,11 +108,11 @@ border-radius:6px;
 border:none;
 }
 
-/* כפתורי עריכה */
+/* כפתורי אדמין */
 
 .modal button{
 width:90%;
-padding:14px;
+padding:16px;
 font-size:18px;
 margin:10px 0;
 border:none;
