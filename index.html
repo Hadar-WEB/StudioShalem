@@ -8,172 +8,9 @@
 
 <title>Studio Shalem</title>
 
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#f7f3ee;
-}
-
-h1{
-text-align:center;
-margin:25px 0;
-font-weight:300;
-letter-spacing:2px;
-}
-
-/* גלריה */
-
-#gallery{
-width:100%;
-}
-
-.product{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:40px 0;
-cursor:pointer;
-}
-
-.product img{
-max-width:90%;
-max-height:70vh;
-object-fit:contain;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
-}
-
-.name{
-margin-top:15px;
-font-size:22px;
-}
-
-.price{
-margin-top:6px;
-font-size:18px;
-color:#444;
-}
-
-.status{
-margin-top:5px;
-font-size:14px;
-}
-
-.instock{
-color:green;
-}
-
-.outstock{
-color:red;
-}
-
-/* מובייל */
-
-@media(max-width:700px){
-
-#gallery{
-display:flex;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-height:85vh;
-}
-
-.product{
-flex:0 0 100%;
-scroll-snap-align:center;
-padding:0;
-}
-
-.product img{
-max-height:60vh;
-}
-
-}
-
-/* חלון מוצר */
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-color:white;
-text-align:center;
-padding-top:60px;
-}
-
-.modal img{
-max-width:90%;
-border-radius:10px;
-}
-
-#close{
-position:absolute;
-top:20px;
-right:40px;
-font-size:40px;
-cursor:pointer;
-}
-
-/* כפתור מנהל */
-
-#adminBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:black;
-color:white;
-border:none;
-padding:14px;
-border-radius:50%;
-font-size:16px;
-cursor:pointer;
-}
-
-/* כפתור הוספה */
-
-#addBtn{
-position:fixed;
-bottom:80px;
-right:20px;
-background:green;
-color:white;
-border:none;
-padding:14px;
-border-radius:50%;
-font-size:18px;
-cursor:pointer;
-display:none;
-}
-
-/* טופס הוספה */
-
-#addForm{
-display:none;
-text-align:center;
-padding:20px;
-}
-
-input,textarea{
-width:80%;
-padding:10px;
-margin:6px;
-}
-
-button{
-cursor:pointer;
-}
-
-</style>
+<link rel="stylesheet" href="styles.css">
 
 </head>
-
 
 <body>
 
@@ -184,8 +21,6 @@ cursor:pointer;
 <button id="adminBtn" onclick="adminLogin()">Admin</button>
 <button id="addBtn" onclick="showAddForm()">+</button>
 
-
-<!-- חלון מוצר -->
 
 <div id="modal" class="modal">
 
@@ -204,23 +39,22 @@ cursor:pointer;
 </div>
 
 
-<!-- טופס הוספת מוצר -->
-
 <div id="addForm">
 
 <h3>הוספת מוצר</h3>
 
-<input id="newName" placeholder="שם מוצר"><br>
+<input id="newName" placeholder="שם מוצר">
 
-<input id="newPrice" type="number" placeholder="מחיר"><br>
+<input id="newPrice" type="number" placeholder="מחיר">
 
-<textarea id="newDesc" placeholder="תיאור"></textarea><br>
+<textarea id="newDesc" placeholder="תיאור"></textarea>
 
-<input type="file" id="newImage" accept="image/*"><br>
+<input type="file" id="newImage" accept="image/*">
 
 <button onclick="saveNewProduct()">שמור מוצר</button>
 
 </div>
+
 
 
 <script type="module">
@@ -233,7 +67,8 @@ collection,
 getDocs,
 doc,
 updateDoc,
-addDoc
+addDoc,
+deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -261,9 +96,12 @@ let modalDesc=document.getElementById("modal-desc")
 let modalPrice=document.getElementById("modal-price")
 let adminArea=document.getElementById("adminArea")
 
-document.getElementById("close").onclick=()=>modal.style.display="none"
+document.getElementById("close").onclick=()=>{
 
-/* טעינת מוצרים */
+modal.style.display="none"
+document.body.classList.remove("modal-open")
+
+}
 
 async function loadProducts(){
 
@@ -307,8 +145,6 @@ document.getElementById("gallery").innerHTML=html
 
 loadProducts()
 
-/* כניסת מנהל */
-
 window.adminLogin=function(){
 
 let pass=prompt("סיסמת מנהל")
@@ -316,7 +152,6 @@ let pass=prompt("סיסמת מנהל")
 if(pass==="1234"){
 
 adminMode=true
-
 alert("מצב מנהל הופעל")
 
 document.getElementById("addBtn").style.display="block"
@@ -325,13 +160,12 @@ document.getElementById("addBtn").style.display="block"
 
 }
 
-/* פתיחת מוצר */
-
 window.openProduct=function(id){
 
 let p=products.find(x=>x.id===id)
 
 modal.style.display="block"
+document.body.classList.add("modal-open")
 
 modalImg.src=p.image
 
@@ -349,6 +183,10 @@ adminArea.innerHTML=`
 
 <button onclick="toggleStock('${id}')">שנה מלאי</button>
 
+<button onclick="changeImage('${id}')">שנה תמונה</button>
+
+<button onclick="deleteProduct('${id}')">מחק מוצר</button>
+
 `
 
 }
@@ -363,8 +201,6 @@ adminArea.innerHTML=""
 }
 
 }
-
-/* שמירת עריכה */
 
 window.saveChanges=async function(id){
 
@@ -386,8 +222,6 @@ loadProducts()
 
 }
 
-/* שינוי מלאי */
-
 window.toggleStock=async function(id){
 
 let product=products.find(p=>p.id===id)
@@ -402,15 +236,63 @@ loadProducts()
 
 }
 
-/* פתיחת טופס הוספה */
+window.changeImage=function(id){
+
+let input=document.createElement("input")
+
+input.type="file"
+input.accept="image/*"
+
+input.onchange=function(){
+
+let file=input.files[0]
+
+let reader=new FileReader()
+
+reader.onload=function(){
+
+updateDoc(doc(db,"products",id),{
+image:reader.result
+}).then(()=>{
+
+alert("התמונה עודכנה")
+
+loadProducts()
+
+})
+
+}
+
+reader.readAsDataURL(file)
+
+}
+
+input.click()
+
+}
+
+window.deleteProduct=function(id){
+
+if(!confirm("למחוק מוצר?")) return
+
+deleteDoc(doc(db,"products",id)).then(()=>{
+
+alert("המוצר נמחק")
+
+modal.style.display="none"
+document.body.classList.remove("modal-open")
+
+loadProducts()
+
+})
+
+}
 
 window.showAddForm=function(){
 
 document.getElementById("addForm").style.display="block"
 
 }
-
-/* שמירת מוצר חדש */
 
 window.saveNewProduct=function(){
 
@@ -424,14 +306,12 @@ let reader=new FileReader()
 
 reader.onload=function(){
 
-let imageData=reader.result
-
 addDoc(collection(db,"products"),{
 
 name:name,
 description:desc,
 price:Number(price),
-image:imageData,
+image:reader.result,
 stock:true
 
 }).then(()=>{

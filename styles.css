@@ -1,48 +1,64 @@
 body{
-font-family:Arial;
 margin:0;
-background:#f6f2ec;
-text-align:center;
+font-family:Arial;
+background:#f7f3ee;
+}
+
+body.modal-open{
+overflow:hidden;
 }
 
 h1{
-padding:30px;
-font-size:36px;
+text-align:center;
+margin:25px 0;
+font-weight:300;
+letter-spacing:2px;
 }
 
-/* גלריה */
-
 #gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,250px);
-gap:25px;
-justify-content:center;
-padding:30px;
+width:100%;
 }
 
 .product{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:40px 0;
 cursor:pointer;
-transition:0.3s;
-}
-
-.product:hover{
-transform:scale(1.05);
 }
 
 .product img{
-width:100%;
-height:250px;
-object-fit:cover;
+max-width:90%;
+max-height:70vh;
+object-fit:contain;
 border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 .name{
-margin-top:10px;
-font-size:18px;
+margin-top:15px;
+font-size:22px;
 }
 
-/* חלון מוצר */
+.price{
+margin-top:6px;
+font-size:18px;
+color:#444;
+}
+
+.status{
+margin-top:5px;
+font-size:14px;
+}
+
+.instock{
+color:green;
+}
+
+.outstock{
+color:red;
+}
 
 .modal{
 display:none;
@@ -51,13 +67,16 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.9);
 color:white;
+text-align:center;
+overflow-y:auto;
 padding-top:60px;
+padding-bottom:120px;
 }
 
 .modal img{
-max-width:500px;
+max-width:90%;
 border-radius:10px;
 }
 
@@ -69,12 +88,75 @@ font-size:40px;
 cursor:pointer;
 }
 
-.modal p{
-max-width:600px;
-margin:auto;
+.modal input,
+.modal textarea{
+width:90%;
+font-size:18px;
+padding:12px;
+margin:10px;
+}
+
+#adminBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:black;
+color:white;
+border:none;
+padding:14px;
+border-radius:50%;
+font-size:16px;
+cursor:pointer;
+}
+
+#addBtn{
+position:fixed;
+bottom:80px;
+right:20px;
+background:green;
+color:white;
+border:none;
+padding:14px;
+border-radius:50%;
+font-size:18px;
+cursor:pointer;
+display:none;
+}
+
+#addForm{
+display:none;
+text-align:center;
 padding:20px;
 }
-.modal{
-overflow-y:auto;
-padding-bottom:100px;
+
+input,textarea{
+width:80%;
+padding:10px;
+margin:6px;
+}
+
+button{
+cursor:pointer;
+margin:6px;
+}
+
+@media(max-width:700px){
+
+#gallery{
+display:flex;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+height:85vh;
+}
+
+.product{
+flex:0 0 100%;
+scroll-snap-align:center;
+padding:0;
+}
+
+.product img{
+max-height:60vh;
+}
+
 }
