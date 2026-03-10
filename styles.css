@@ -4,12 +4,16 @@ font-family:Arial;
 background:#f7f3ee;
 }
 
+body.modal-open{
+overflow:hidden;
+}
+
 h1{
 text-align:center;
 margin:25px 0;
+font-weight:300;
+letter-spacing:2px;
 }
-
-/* גלריה */
 
 #gallery{
 width:100%;
@@ -19,32 +23,42 @@ width:100%;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:center;
 padding:40px 0;
+cursor:pointer;
 }
 
 .product img{
 max-width:90%;
 max-height:70vh;
-border-radius:10px;
+object-fit:contain;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 .name{
-margin-top:10px;
-font-size:20px;
+margin-top:15px;
+font-size:22px;
 }
 
 .price{
+margin-top:6px;
 font-size:18px;
+color:#444;
 }
 
 .status{
+margin-top:5px;
 font-size:14px;
 }
 
-.instock{color:green;}
-.outstock{color:red;}
+.instock{
+color:green;
+}
 
-/* מודאל */
+.outstock{
+color:red;
+}
 
 .modal{
 display:none;
@@ -53,64 +67,110 @@ top:0;
 left:0;
 width:100vw;
 height:100vh;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.95);
+color:white;
+
+
+flex-direction:column;
 align-items:center;
-justify-content:center;
-z-index:1000;
-}
 
-.modal-card{
-background:white;
-color:black;
-border-radius:12px;
-padding:25px;
-width:90%;
-max-width:420px;
-text-align:center;
-max-height:90vh;
 overflow-y:auto;
+padding:20px;
 }
 
-.modal-card img{
-width:100%;
+.modal img{
+max-width:90%;
+max-height:40vh;
 border-radius:10px;
-margin-bottom:15px;
+margin-bottom:20px;
 }
-
-/* כפתור סגירה */
 
 #close{
 position:absolute;
 top:20px;
-right:25px;
-font-size:30px;
+right:40px;
+font-size:40px;
 cursor:pointer;
-color:white;
 }
 
-/* כפתור אדמין */
-
+.modal input,
+.modal textarea{
+width:95%;
+font-size:18px;
+padding:14px;
+margin:10px 0;
+border-radius:6px;
+border:none;
+}
+.modal button{
+width:90%;
+padding:14px;
+font-size:18px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+}
 #adminBtn{
 position:fixed;
 bottom:20px;
 right:20px;
-width:40px;
-height:40px;
-border-radius:50%;
 background:black;
 color:white;
 border:none;
+padding:14px;
+border-radius:50%;
+font-size:16px;
+cursor:pointer;
 }
 
 #addBtn{
 position:fixed;
-bottom:70px;
+bottom:80px;
 right:20px;
-width:40px;
-height:40px;
-border-radius:50%;
 background:green;
 color:white;
 border:none;
+padding:14px;
+border-radius:50%;
+font-size:18px;
+cursor:pointer;
 display:none;
+}
+
+#addForm{
+display:none;
+text-align:center;
+padding:20px;
+}
+
+input,textarea{
+width:80%;
+padding:10px;
+margin:6px;
+}
+
+button{
+cursor:pointer;
+margin:6px;
+}
+
+@media(max-width:700px){
+
+#gallery{
+display:flex;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+height:85vh;
+}
+
+.product{
+flex:0 0 100%;
+scroll-snap-align:center;
+padding:0;
+}
+
+.product img{
+max-height:60vh;
+}
+
 }
