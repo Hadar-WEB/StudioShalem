@@ -111,6 +111,9 @@ const db = getFirestore(app);
 let adminMode=false;
 let products=[];
 
+let imageIndex = 0
+let imageList = []
+
 let modal=document.getElementById("modal")
 let modalImg=document.getElementById("modal-img")
 let modalName=document.getElementById("modal-name")
@@ -208,8 +211,21 @@ let p=products.find(x=>x.id===id)
 modal.style.display="flex"
 document.body.classList.add("modal-open")
 
-modalImg.src=p.image
+let baseImage=p.image
 
+imageList=[baseImage]
+
+let second=baseImage.replace(".jpg","_2.jpg")
+let third=baseImage.replace(".jpg","_3.jpg")
+
+imageList.push(second)
+imageList.push(third)
+
+imageIndex=0
+
+modalImg.src=imageList[imageIndex]
+
+modalImg.onclick=nextImage
 modalStock.innerText=p.stock?"במלאי":"לא במלאי"
 
 modalName.innerHTML=`<input id="editName" value="${p.name}">`
@@ -321,6 +337,17 @@ loadProducts()
 
 }
 
+function nextImage(){
+
+imageIndex++
+
+if(imageIndex>=imageList.length){
+imageIndex=0
+}
+
+modalImg.src=imageList[imageIndex]
+
+}
 
 window.showAddForm=function(){
 
