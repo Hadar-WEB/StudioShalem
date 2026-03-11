@@ -13,6 +13,23 @@
 </head>
 
 <body>
+    <section id="studio">
+
+<div class="studio-content">
+
+<h1>סטודיו שלם</h1>
+
+<p>קרמיקה בעבודת יד</p>
+
+<p>מורשת, משגב</p>
+
+<div class="scroll-arrow" onclick="scrollToGallery()">
+↓
+</div>
+
+</div>
+
+</section>
 <a id="whatsappBtn"
 href="https://wa.me/972507666901"
 target="_blank">
@@ -398,7 +415,13 @@ document.getElementById("addForm").style.display="none"
 reader.readAsDataURL(file)
 
 }
+function scrollToGallery(){
 
+document.getElementById("gallery").scrollIntoView({
+behavior:"smooth"
+})
+
+}
 </script>
 
 </body>
