@@ -252,24 +252,25 @@ padding:0;
 max-height:60vh;
 }
 
-#categoryBar{
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:20px;
+.gallery-wrapper{
+position:relative;
 }
 
-#categoryBar button{
-background:white;
-border:1px solid #ddd;
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
+.scroll-hint{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+font-size:40px;
+color:#999;
+pointer-events:none;
+animation:hintMove 1.5s infinite;
 }
 
-#categoryBar button:hover{
-background:#eee;
+@keyframes hintMove{
+0%{transform:translateY(-50%) translateX(0);}
+50%{transform:translateY(-50%) translateX(10px);}
+100%{transform:translateY(-50%) translateX(0);}
 }
 
 @keyframes bounce{
