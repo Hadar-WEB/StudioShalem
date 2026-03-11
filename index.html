@@ -50,6 +50,16 @@ target="_blank">
 
 </div>
 <h1>גלריה </h1>
+<div id="categoryBar">
+
+<button onclick="filterCategory('all')">כל המוצרים</button>
+<button onclick="filterCategory('כוסות')">כוסות</button>
+<button onclick="filterCategory('ואזות')">ואזות</button>
+<button onclick="filterCategory('למטבח')">למטבח</button>
+<button onclick="filterCategory('כלי נוי')">כלי נוי</button>
+<button onclick="filterCategory('אחר')">אחר</button>
+
+</div>
 <div id="gallery"></div>
 
 <button id="adminBtn" onclick="adminLogin()">A</button>
@@ -92,6 +102,16 @@ target="_blank">
 <input id="newPrice" type="number" placeholder="מחיר">
 
 <textarea id="newDesc" placeholder="תיאור"></textarea>
+
+<select id="newCategory">
+
+<option value="כוסות">כוסות</option>
+<option value="ואזות">ואזות</option>
+<option value="למטבח">למטבח</option>
+<option value="כלי נוי">כלי נוי</option>
+<option value="אחר">אחר</option>
+
+</select>
 
 <input type="file" id="newImage" accept="image/*">
 
@@ -256,6 +276,19 @@ modalName.innerHTML=`<input id="editName" value="${p.name}">`
 
 modalDesc.innerHTML=`<textarea id="editDesc">${p.description}</textarea>`
 
+modalDesc.innerHTML+=`
+
+<select id="editCategory">
+
+<option ${p.category=="כוסות"?"selected":""}>כוסות</option>
+<option ${p.category=="ואזות"?"selected":""}>ואזות</option>
+<option ${p.category=="למטבח"?"selected":""}>למטבח</option>
+<option ${p.category=="כלי נוי"?"selected":""}>כלי נוי</option>
+<option ${p.category=="אחר"?"selected":""}>אחר</option>
+
+</select>
+`
+
 modalPrice.innerHTML=`<input id="editPrice" type="number" value="${p.price}">`
 
 adminArea.innerHTML=`
@@ -278,12 +311,14 @@ window.saveChanges=async function(id){
 let newName=document.getElementById("editName").value
 let newDesc=document.getElementById("editDesc").value
 let newPrice=document.getElementById("editPrice").value
-
+let newCategory=document.getElementById("editCategory").value
 await updateDoc(doc(db,"products",id),{
 
 name:newName,
 description:newDesc,
-price:Number(newPrice)
+price:Number(newPrice),
+category:newCategory
+
 
 })
 
@@ -385,6 +420,7 @@ window.saveNewProduct=function(){
 let name=document.getElementById("newName").value
 let price=document.getElementById("newPrice").value
 let desc=document.getElementById("newDesc").value
+let category=document.getElementById("newCategory").value
 
 let file=document.getElementById("newImage").files[0]
 
@@ -397,8 +433,10 @@ addDoc(collection(db,"products"),{
 name:name,
 description:desc,
 price:Number(price),
+category:category,
 image:reader.result,
 stock:true
+
 
 }).then(()=>{
 

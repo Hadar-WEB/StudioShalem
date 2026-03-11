@@ -252,6 +252,25 @@ padding:0;
 max-height:60vh;
 }
 
+#categoryBar{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+#categoryBar button{
+background:white;
+border:1px solid #ddd;
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+}
+
+#categoryBar button:hover{
+background:#eee;
+}
 
 @keyframes bounce{
 0%,20%,50%,80%,100%{transform:translateY(0);}
