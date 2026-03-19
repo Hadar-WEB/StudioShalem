@@ -633,6 +633,11 @@
   function buildDots() {
     const dotsContainer = document.getElementById('sliderDots');
     dotsContainer.innerHTML = '';
+    // If more than 10 products, hide dots completely — counter is enough
+    if (totalSlides > 10) {
+      dotsContainer.style.display = 'none';
+      return;
+    }
     for (let i = 0; i < totalSlides; i++) {
       const dot = document.createElement('span');
       dot.className = 'slider-dot' + (i === currentSlide ? ' active' : '');
