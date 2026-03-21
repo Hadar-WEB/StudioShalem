@@ -354,7 +354,6 @@
   });
 
  async function loadProducts() {
-  
     // 1. קודם כל, נבדוק אם יש הנחה פעילה במסד הנתונים
     try {
       const settingsDoc = await getDoc(doc(db, "settings", "store"));
@@ -379,7 +378,7 @@
       let status = p.stock ? "במלאי" : "אזל";
       let className = p.stock ? "instock" : "outstock";
 
-      // 2. חישוב המחיר וההנחה (כולל העיגול כלפי מטה)
+      // חישוב המחיר
       let priceHtml = `<div class="price">₪${p.price}</div>`;
       
       if (globalDiscount > 0) {
@@ -394,7 +393,7 @@
 
       html += `
         <div class="product" ${adminMode ? `onclick="openProduct('${p.id}')"` : ""}>
-          <img src="${p.image}" alt="${p.name}" loading="lazy">
+          <img src="${p.image}" alt="כלי לסטודיו">
           <div class="product-info">
             <div class="name">${p.name}</div>
             <div class="description">${p.description}</div>
@@ -406,6 +405,11 @@
     });
 
     document.getElementById("gallery").innerHTML = html;
+    
+    // סידור הגלריה מחדש מיד אחרי שינוי מחיר
+    if (typeof initSlider === "function") {
+      setTimeout(initSlider, 100);
+    }
   }
 
   window.openProduct = function(id) {
@@ -760,22 +764,15 @@ window.setGlobalDiscount = async function() {
     resizeTimer = setTimeout(initSlider, 250);
   });
 
-  // Override loadProducts to also init slider after loading
-  const originalLoadProducts = loadProducts;
-  async function loadProductsWithSlider() {
-    await originalLoadProducts();
-    setTimeout(initSlider, 100);
-  }
-  // Re-observe reveals after products load
+  // הפעלת האנימציות של האתר
   setTimeout(() => {
     document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
       revealObserver.observe(el);
     });
   }, 500);
 
-  // Init slider on first load
-  setTimeout(initSlider, 1500);
-
+  // טעינת הכלים והמחירים לכל הלקוחות כשהאתר עולה!
+  loadProducts();
   </script>
 
 </body>
