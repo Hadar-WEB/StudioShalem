@@ -1,3 +1,4 @@
+
 /* ═══════════════════════════════════════════════════════
    STUDIO SHALEM — Premium Landing Page Styles
    סטודיו שלם — קרמיקה בעבודת יד
@@ -930,20 +931,30 @@ a {
   margin-bottom: 30px;
 }
 
-.contact-whatsapp {
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-whatsapp, .contact-instagram {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: #25D366;
   color: white;
-  padding: 16px 40px;
+  padding: 16px 32px;
   border-radius: 100px;
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 600;
   transition: all 0.4s var(--ease-premium);
-  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
   text-decoration: none;
+}
+
+.contact-whatsapp {
+  background: #25D366;
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
 }
 
 .contact-whatsapp:hover {
@@ -952,7 +963,17 @@ a {
   box-shadow: 0 10px 35px rgba(37, 211, 102, 0.4);
 }
 
-.contact-whatsapp svg {
+.contact-instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 6px 25px rgba(220, 39, 67, 0.3);
+}
+
+.contact-instagram:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(220, 39, 67, 0.4);
+}
+
+.contact-whatsapp svg, .contact-instagram svg {
   width: 24px;
   height: 24px;
 }
@@ -1031,8 +1052,8 @@ a {
 #whatsappBtn {
   position: fixed;
   bottom: 28px;
-   right: 28px;
-   left: auto;
+  left: 28px;
+  right: auto;
   z-index: 2000;
   text-align: center;
   text-decoration: none;
