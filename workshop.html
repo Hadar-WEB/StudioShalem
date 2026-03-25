@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>סדנאות | סטודיו שלם</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="images/LOGO1.png">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar" style="background: rgba(250, 247, 242, 0.95); box-shadow: 0 1px 30px rgba(44, 36, 24, 0.08);">
+    <div class="nav-logo">
+      <img src="images/LOGO1.png" alt="סטודיו שלם לוגו">
+      <span class="nav-logo-text" style="color: var(--clay-dark);">סטודיו שלם</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" style="color: var(--charcoal);">ראשי</a></li>
+      <li><a href="shop.html" style="color: var(--charcoal);">חנות</a></li>
+      <li><a href="workshop.html" style="color: var(--terracotta); font-weight: bold;">סדנאות</a></li>
+      <li><a href="index.html#contact" class="nav-cta">צרו קשר</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span style="background: var(--charcoal);"></span>
+      <span style="background: var(--charcoal);"></span>
+      <span style="background: var(--charcoal);"></span>
+    </div>
+  </nav>
+
+  <div style="height: 100px;"></div>
+
+  <section class="workshops-section" id="workshops">
+    <div class="section-header">
+      <div class="section-tag reveal">בואו ליצור איתי</div>
+      <h2 class="section-title reveal reveal-delay-1">סדנאות קדרות</h2>
+      <div class="section-line reveal reveal-delay-2"></div>
+    </div>
+    
+    <p class="workshop-main-subtitle reveal reveal-delay-2">
+      לפרטים נוספים ותיאום, <a href="index.html#contact">צרו קשר</a>.
+    </p>
+
+    <div class="workshops-sliders-grid">
+      <div class="workshop-item reveal">
+        <div class="workshop-text">
+          
+          <h3>סדנאות בסטודיו</h3>
+          <p>חוויה אישית בסטודיו שלי במורשת, הכוללת עבודה על האובניים או פיסול ידני, צעד אחר צעד (עד 6 משתתפים).</p>
+        </div>
+        <div class="wks-slider-container" id="wks-studio-slider">
+          <div class="wks-slider-wrapper">
+            <div class="wks-slide"><img src="images/wsin2.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin1.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin3.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin4.jpeg"></div>
+            <div class="wks-slide"><img src="images/wsin5.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin6.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin7.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin8.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin9.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin10.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin11.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin12.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsin13.jpeg"></div>
+            <div class="wks-slide"><img src="images/wsin14.jpeg" ></div>
+
+
+          </div>
+          <button class="wks-slider-btn prev" aria-label="תמונה קודמת">&#10094;</button>
+          <button class="wks-slider-btn next" aria-label="תמונה הבאה">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="workshop-item reveal reveal-delay-1">
+        <div class="workshop-text">
+          <h3>הסטודיו מגיע אליכם</h3>
+          <p>חוויית יצירה מושלמת לימי גיבוש, בתי ספר ואירועים. אנחנו מגיעים לכל מקום שתרצו (אין הגבלת משתתפים).</p>
+        </div>
+        <div class="wks-slider-container" id="wks-outdoors-slider">
+          <div class="wks-slider-wrapper">
+             <div class="wks-slide"><img src="images/wsout11.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout1.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout2.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout3.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout4.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout5.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout6.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout7.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout8.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout9.jpeg" ></div>
+            <div class="wks-slide"><img src="images/wsout10.jpeg" ></div>
+           
+          
+          </div>
+          <button class="wks-slider-btn prev" aria-label="תמונה קודמת">&#10094;</button>
+          <button class="wks-slider-btn next" aria-label="תמונה הבאה">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <img src="images/LOGO1.png" class="footer-logo" alt="סטודיו שלם">
+    <p>סטודיו שלם · קרמיקה בעבודת יד · מורשת, משגב</p>
+    <p style="margin-top:12px; font-size:12px; opacity:0.5;">© 2026 כל הזכויות שמורות</p>
+  </footer>
+
+  <a id="whatsappBtn" href="https://wa.me/972507666901" target="_blank">
+    <img src="images/whatsapp.svg" alt="WhatsApp">
+    <div class="whatsapp-text">לפרטים לחצו כאן</div>
+  </a>
+
+  <script>
+    function initWorkshopSliders() {
+      function setupSlider(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const wrapper = container.querySelector('.wks-slider-wrapper');
+        const slides = container.querySelectorAll('.wks-slide');
+        const prevBtn = container.querySelector('.wks-slider-btn.prev');
+        const nextBtn = container.querySelector('.wks-slider-btn.next');
+        let currentIndex = 0; 
+        const maxIndex = slides.length - 1;
+        function updateSlider() {
+          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        nextBtn.addEventListener('click', () => {
+          if (currentIndex < maxIndex) currentIndex++; else currentIndex = 0;
+          updateSlider();
+        });
+        prevBtn.addEventListener('click', () => {
+          if (currentIndex > 0) currentIndex--; else currentIndex = maxIndex;
+          updateSlider();
+        });
+        updateSlider();
+      }
+      setupSlider('wks-studio-slider');
+      setupSlider('wks-outdoors-slider');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initWorkshopSliders, 500);
+      
+      // הופעת אלמנטים בגלילה
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    });
+  </script>
+  <script>
+    // פתיחה וסגירה של תפריט ההמבורגר במובייל (3 הפסים)
+    window.toggleNav = function() {
+      document.getElementById('navLinks').classList.toggle('open');
+    };
+    window.closeNav = function() {
+      document.getElementById('navLinks').classList.remove('open');
+    };
+
+    // הפעלת התפריט הנפתח תחת "ראשי"
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.getElementById('mainDropdown');
+      const dropdownToggle = document.getElementById('mainMenuToggle');
+      if (dropdownToggle && dropdown) {
+        dropdownToggle.addEventListener('click', function(e) {
+          e.preventDefault(); 
+          dropdown.classList.toggle('active'); 
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) dropdown.classList.remove('active');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

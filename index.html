@@ -41,12 +41,20 @@
       <img src="images/LOGO1.png" alt="סטודיו שלם לוגו">
       <span class="nav-logo-text">סטודיו שלם</span>
     </div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#studio" onclick="closeNav()">ראשי</a></li>
-      <li><a href="#about" onclick="closeNav()">הסיפור שלנו</a></li>
-      <!--<li><a href="#showcase" onclick="closeNav()">חוויות מהסטודיו</a></li>-->
-      <li><a href="#products" onclick="closeNav()">חנות</a></li>
-      <li><a href="#contact" onclick="closeNav()" class="nav-cta">צרו קשר</a></li>
+<ul class="nav-links" id="navLinks">
+      <li class="dropdown" id="mainDropdown">
+       <a href="#" id="mainMenuToggle">ראשי <span class="dropdown-arrow">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="index.html#studio" onclick="closeNav()">דף הבית</a></li>
+          <li><a href="index.html#about" onclick="closeNav()">הסיפור שלנו</a></li>
+          <li><a href="index.html#process" onclick="closeNav()">התהליך</a></li>
+          <li><a href="index.html#contact" onclick="closeNav()">צרו קשר</a></li>
+        </ul>
+      </li>
+      
+      <li><a href="shop.html">חנות</a></li>
+      <li><a href="workshop.html">סדנאות</a></li>
+      <li><a href="index.html#contact" class="nav-cta">צרו קשר</a></li>
     </ul>
     <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
       <span></span>
@@ -64,7 +72,7 @@
       <div class="hero-divider"></div>
       <p class="hero-subtitle">קרמיקה בעבודת יד</p>
       <p class="hero-location">מורשת, משגב · מלב הגליל</p>
-      <a href="#products" class="hero-cta">
+      <a href="shop.html" class="hero-cta">
         גלו את הכלים שלנו
         <span>←</span>
       </a>
@@ -152,62 +160,10 @@
     </div>
   </section>
 
-  <!-- ═══════════ SHOWCASE GALLERY - חוויות מהסטודיו ═══════════ 
-  <section class="showcase-section" id="showcase">
-    <div class="section-header">
-      <div class="section-tag reveal">גלריה</div>
-      <h2 class="section-title reveal reveal-delay-1"> חוויות מהסטודיו</h2>
-      <div class="section-line reveal reveal-delay-2"></div>
-    </div>
 
-    <div class="showcase-grid reveal">
-      <div class="showcase-item">
-        <img src="images/item43.jpeg" alt="קנקן מעוטר בפרחים" loading="lazy">
-      </div>
-      <div class="showcase-item">
-        <img src="images/item1.jpeg" alt="מגשי קרמיקה עם לבנדר" loading="lazy">
-      </div>
-      <div class="showcase-item">
-        <img src="images/item2.jpeg" alt="אגרטל מעוטר" loading="lazy">
-      </div>
-      <div class="showcase-item">
-        <img src="images/item42.jpeg" alt="אגרטל פרחים" loading="lazy">
-      </div>
-      <div class="showcase-item">
-        <img src="images/item21.jpeg" alt="סיר קרמיקה" loading="lazy">
-      </div>
-      <div class="showcase-item">
-        <img src="images/item38.jpeg" alt="כלי מטבח" loading="lazy">
-      </div>
-    </div>
-  </section>
--->
+  
 
-  <!-- ═══════════ PRODUCTS (Firebase) ═══════════ -->
-  <section class="gallery-section" id="products">
-    <div class="section-header">
-      <div class="logo-container">
-        <img src="images/LOGO1.png" class="studio-logo" alt="סטודיו שלם">
-      </div>
-      <div class="section-tag reveal">חנות</div>
-      <h2 class="section-title reveal reveal-delay-1">הכלים שלי</h2>
-      <div class="section-line reveal reveal-delay-2"></div>
-    </div>
-
-    <div class="gallery-wrapper">
-      <div id="gallery"></div>
-      <!-- Slider Controls (mobile only) -->
-      <button class="slider-btn slider-prev" id="sliderPrev" aria-label="הקודם">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-      <button class="slider-btn slider-next" id="sliderNext" aria-label="הבא">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-    </div>
-    <div class="slider-dots" id="sliderDots"></div>
-    <div class="slider-counter" id="sliderCounter"></div>
-  </section>
-
+  
   <!-- ═══════════ CONTACT ═══════════ -->
   <section class="contact-section" id="contact">
     <div class="section-header">
@@ -789,8 +745,81 @@ window.setGlobalDiscount = async function() {
 
   // טעינת הכלים והמחירים לכל הלקוחות כשהאתר עולה!
   loadProducts();
-  </script>
+  // ═══════════ INITIALIZE WORKSHOP SLIDERS (RTL) ═══════════
+  function initWorkshopSliders() {
+    // פונקציה גנרית שמפעילה סליידר לפי ID
+    function setupSlider(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
 
+      const wrapper = container.querySelector('.wks-slider-wrapper');
+      const slides = container.querySelectorAll('.wks-slide');
+      const prevBtn = container.querySelector('.wks-slider-btn.prev');
+      const nextBtn = container.querySelector('.wks-slider-btn.next');
+      
+      let currentIndex = 0; // 0 = התמונה הכי ימנית
+      const maxIndex = slides.length - 1;
+
+      function updateSlider() {
+        // בגלל שזה RTL וה-wrapper הוא LTR,
+        // אנחנו מזיזים באחוזים חיוביים כדי "לחשוף" את התמונות שמשמאל
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+        } else {
+          currentIndex = 0; // חוזר להתחלה
+        }
+        updateSlider();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+        } else {
+          currentIndex = maxIndex; // הולך לסוף
+        }
+        updateSlider();
+      });
+      
+      // אתחול מיקום ראשוני
+      updateSlider();
+    }
+
+    // הפעלת שני הסליידרים הספציפיים
+    setupSlider('wks-studio-slider');
+    setupSlider('wks-outdoors-slider');
+  }
+
+  // הפעלה כשהדף נטען
+  document.addEventListener('DOMContentLoaded', () => {
+    // אנחנו נותנים השהייה קטנה כדי לוודא שהתמונות נטענו והמימדים נכונים
+    setTimeout(initWorkshopSliders, 500);
+  });
+  </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.getElementById('mainDropdown');
+      const dropdownToggle = document.getElementById('mainMenuToggle');
+
+      if (dropdownToggle && dropdown) {
+        // כשלוחצים על המילה "ראשי"
+        dropdownToggle.addEventListener('click', function(e) {
+          e.preventDefault(); // מונע קפיצה לראש הדף
+          dropdown.classList.toggle('active'); // פותח/סוגר את התפריט
+        });
+
+        // סגירת התפריט כשלוחצים בכל מקום אחר במסך
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
